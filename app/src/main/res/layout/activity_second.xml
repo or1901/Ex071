@@ -134,6 +134,7 @@
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:backgroundTint="#00BCD4"
+            android:onClick="back"
             android:text="back"
             android:textSize="18sp" />
 

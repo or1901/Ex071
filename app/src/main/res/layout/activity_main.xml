@@ -61,6 +61,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:backgroundTint="#000000"
+            android:onClick="plus"
             android:text="+"
             android:textSize="20sp" />
 
@@ -75,6 +76,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:backgroundTint="#000000"
+            android:onClick="minus"
             android:text="-"
             android:textSize="20sp" />
 
@@ -106,6 +108,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:backgroundTint="#000000"
+            android:onClick="mul"
             android:text="*"
             android:textSize="20sp" />
 
@@ -120,6 +123,7 @@
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:backgroundTint="#000000"
+            android:onClick="div"
             android:text="/"
             android:textSize="20sp" />
 
@@ -151,6 +155,7 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:backgroundTint="#000000"
+            android:onClick="reset"
             android:text="A/C"
             android:textSize="20sp" />
 
@@ -165,6 +170,7 @@
             android:layout_height="match_parent"
             android:layout_weight="3"
             android:backgroundTint="#000000"
+            android:onClick="equals"
             android:text="="
             android:textSize="20sp" />
 
@@ -196,6 +202,7 @@
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:backgroundTint="#00BCD4"
+            android:onClick="nextPage"
             android:text="credits" />
 
         <Space
