@@ -11,17 +11,25 @@ public class MainActivity extends AppCompatActivity {
     EditText et;
     Intent si;
 
+    // Variables for input validity check
+    String expression;
+    int lastIndex;
+
+    // Variables for the expression calculating
+    double finalResult = 0;
+    String[] parts;
+    double mulResult;
+    double divResult;
+    String currentPhrase;
+    String[] mulSplit;
+    String[] divSplit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         et = findViewById(R.id.et);
-    }
-
-    public void nextPage(View view) {
-        si = new Intent(this, SecondActivity.class);
-        startActivity(si);
     }
 
     public void plus(View view) {
@@ -53,15 +61,55 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void equals(View view) {
+        if(isValidAction()) {
+            expression = et.getText().toString();
+
+            expression = expression.replace("-", "+-");
+
+            parts = expression.split("\\+");
+            finalResult = 0;
+
+            for(int i = 0; i < parts.length; i++) {
+                mulSplit = parts[i].split("\\*");
+                mulResult = 1;
+
+                for (int j = 0; j < mulSplit.length; j++) {
+                    currentPhrase = mulSplit[j];
+
+                    if (currentPhrase.contains("/")) {
+                        divSplit = currentPhrase.split("/");
+                        divResult = Double.parseDouble(divSplit[0]) / Double.parseDouble(divSplit[1]);
+
+                        mulResult *= divResult;
+                    } else
+                        mulResult *= Double.parseDouble(currentPhrase);
+                }
+                finalResult += mulResult;
+            }
+
+            et.setText("" + finalResult);
+        }
+        else
+            et.setText("Error");
+
+
+    }
+
+    public void nextPage(View view) {
+        si = new Intent(this, SecondActivity.class);
+
+        si.putExtra("result", finalResult);
+        startActivity(si);
     }
 
     public boolean isValidAction(){
-        String text = et.getText().toString();
-        int lastIndex = text.length() - 1;
+        expression = et.getText().toString();
+        lastIndex = expression.length() - 1;
 
-        if(text.length() > 0){
-            return (text.charAt(lastIndex) != '+') && (text.charAt(lastIndex) != '-')
-                    && (text.charAt(lastIndex) != '*') && (text.charAt(lastIndex) != '/');
+        if(expression.length() > 0){
+            return (expression.charAt(lastIndex) != '+') && (expression.charAt(lastIndex) != '-')
+                    && (expression.charAt(lastIndex) != '*') && (expression.charAt(lastIndex) != '/')
+                    && (!expression.contains("E")) && (!expression.contains("/0"));
         }
 
         return false;
