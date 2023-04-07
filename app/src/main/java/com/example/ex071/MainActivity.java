@@ -35,24 +35,28 @@ public class MainActivity extends AppCompatActivity {
     public void plus(View view) {
         if(isValidAction()) {
             et.setText(et.getText().toString() + "+");
+            et.setSelection(et.getText().length());
         }
     }
 
     public void minus(View view) {
         if(isValidAction()) {
             et.setText(et.getText().toString() + "-");
+            et.setSelection(et.getText().length());
         }
     }
 
     public void mul(View view) {
         if(isValidAction()) {
             et.setText(et.getText().toString() + "*");
+            et.setSelection(et.getText().length());
         }
     }
 
     public void div(View view) {
         if(isValidAction()) {
             et.setText(et.getText().toString() + "/");
+            et.setSelection(et.getText().length());
         }
     }
 
@@ -63,6 +67,9 @@ public class MainActivity extends AppCompatActivity {
     public void equals(View view) {
         if(isValidAction()) {
             expression = et.getText().toString();
+
+            if(expression.startsWith("-"))
+                expression = expression.replaceFirst("-", "0-");
 
             expression = expression.replace("-", "+-");
 
@@ -84,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
                     } else
                         mulResult *= Double.parseDouble(currentPhrase);
                 }
+
                 finalResult += mulResult;
             }
 
@@ -92,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         else
             et.setText("Error");
 
-
+        et.setSelection(et.getText().length());
     }
 
     public void nextPage(View view) {
